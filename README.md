@@ -11,7 +11,7 @@
 1. **SSH into server**
 
 ```
-$ ssh -i ~/.ssh/aws_key ubuntu@54.85.17.85
+$ ssh -i item-cat.pem ubuntu@54.165.201.125
 ```
 
 2. **Update all packages**
@@ -104,8 +104,8 @@ $ sudo apt-get install git
 $ cd /var/www
 $ sudo mkdir FlaskApp
 $ sudo chown -R grader:grader FlaskApp
-$ cd /FlaskApp
-$ git clone https://github.com/UddeshJain/item_catalog.git FlaskApp
+$ cd FlaskApp
+$ git clone https://github.com/theashishmalik/item-catalog.git FlaskApp
 ```
 
 11. **Create a flaskapp.wsgi**
@@ -128,10 +128,10 @@ from FlaskApp import app as application
 application.secret_key = 'super_secret_key'
 ```
 
-12. **Rename `project.py` to `__init__.py`**
+12. **Rename `app.py` to `__init__.py`**
 
 ```
-$ mv application.py __init__.py
+$ mv app.py __init__.py
 ```
 
 13. **Install virtual environment**
@@ -150,77 +150,3 @@ $ sudo apt-get install python-pip
 $ pip install Flask
 $ sudo pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils
 ```
-
-15. **Update path for `client_secrets.json` file in `__init__.py`**
-
-* From `client_secrets.json` to `/var/www/FlaskApp/FlaskApp/client_secrets.json`
-
-16. **Create Apache configuration file**
-
-```
-$ sudo nano /etc/apache2/sites-available/FlaskApp.conf
-```
-
-* Paste this code
-
-```apache
-<VirtualHost *:80>
-		ServerName 54.85.17.85.xip.io
-		ServerAdmin admin@uddesh.com
-		WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
-		<Directory /var/www/FlaskApp/FlaskApp/>
-			Order allow,deny
-			Allow from all
-		</Directory>
-		Alias /static /var/www/FlaskApp/FlaskApp/static
-		<Directory /var/www/FlaskApp/FlaskApp/static/>
-			Order allow,deny
-			Allow from all
-		</Directory>
-		ErrorLog ${APACHE_LOG_DIR}/error.log
-		LogLevel warn
-		CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
-
-* Enable the virtual host sudo `sudo a2ensite FlaskApp`
-
-17. **Install and configure PostgreSQL**
-
-```
-$ sudo apt-get install libpq-dev python-dev
-$ sudo apt-get install postgresql postgresql-contrib
-$ sudo su - postgres
-$ psql
-$ CREATE USER catalog WITH PASSWORD 'password';
-$ ALTER USER catalog CREATEDB;
-$ CREATE DATABASE catalog WITH OWNER catalog;
-$ \c catalog
-$ REVOKE ALL ON SCHEMA public FROM public;
-$ GRANT ALL ON SCHEMA public TO catalog;
-$ \q
-$ exit
-```
-
-18. **Change create engine line in `__init__.py`, `database_setup.py`, `menus.py` to:** `engine = create_engine('postgresql://catalog:password@localhost/catalog')`
-
-19. **Run `database_setup.py` and `menus.py`**
-
-```
-$ python /var/www/FlaskApp/FlaskApp/database_setup.py
-$ python /var/www/FlaskApp/FlaskApp/menus.py
-```
-
-  * **Restart Apache**
-
-  ```
-  $ sudo service apache2 restart
-  ```
-
-  ### Now open your brouser and visit to [http://54.85.17.85.xip.io/]()
-
-  # Refrence
-
-  * Digital Oceans: [How To Deploy a Flask Application on an Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
-
-  * Aws: [Connecting to Your Linux Instance Using SSH](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
