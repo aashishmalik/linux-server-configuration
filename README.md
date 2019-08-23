@@ -228,6 +228,6 @@ CLIENT_ID = json.loads(
 oauth_flow = flow_from_clientsecrets('/var/www/FlaskApp/FlaskApp//client_secrets.json', scope='')
 ```
 
-### Now open your brouser and visit to [http://54.165.201.125.xip.io/]()
+### Now open your brouser and visit to [http://54.165.201.125.xip.io/](http://54.165.201.125.xip.io/)
 
 
