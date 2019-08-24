@@ -230,4 +230,15 @@ oauth_flow = flow_from_clientsecrets('/var/www/FlaskApp/FlaskApp//client_secrets
 
 ### Now open your brouser and visit to [http://54.165.201.125.xip.io/](http://54.165.201.125.xip.io/)
 
+## SCREENSHOTS
+
+> ssh as grader :
+
+![Create](https://github.com/theashishmalik/linux-server-configuration/blob/master/static/login.png)
+
+## References
+[Flask document](http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/)
+
+[Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-run-django-with-mod_wsgi-and-apache-with-a-virtualenv-python-environment-on-a-debian-vps)
+
 
