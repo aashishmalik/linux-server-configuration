@@ -236,6 +236,10 @@ oauth_flow = flow_from_clientsecrets('/var/www/FlaskApp/FlaskApp//client_secrets
 
 ![Create](https://github.com/theashishmalik/linux-server-configuration/blob/master/static/login.png)
 
+> Application:
+
+![Create](https://github.com/theashishmalik/linux-server-configuration/blob/master/static/host.png)
+
 ## References
 [Flask document](http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/)
 
